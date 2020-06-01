@@ -40,7 +40,7 @@ const NewProduct = (props) => {
                     value={enteredPrice}
                     onChange={priceHandler}
                 />
-                <Button type="submit">Add Product</Button>
+                <Button type="submit">ADD PRODUCT</Button>
             </form>
         </section>
     );
