@@ -1,21 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const uuid = require('uuid/v4');
+const cors = require('cors');
 
 const app = express();
 
 const DUMMY_PRODUCTS = [];
 
+app.use(cors());
 app.use(bodyParser.json());
-app.use((req,res,next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
-    next();
-});
 
-app.get('/product', (req,res,next) => {
-    res.status(200).json({ products: DUMMY_PRODUCTS});
+// app.use((req,res,next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+//     next();
+// });
+
+app.get('/products', (req,res,next) => {
+    res.json({ products: DUMMY_PRODUCTS});
 });
 
 app.post('/new-product', (req,res,next)=>{
@@ -32,6 +35,8 @@ app.post('/new-product', (req,res,next)=>{
         title,
         price
     };
+
+    console.log(createProduct);
 
     DUMMY_PRODUCTS.push(createProduct);
 
